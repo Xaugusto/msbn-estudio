@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for atributo in atributos %}
+        <form action="/edit_user" method="post">
+            Nome:
+            <input type="text" name="nome" value="{{ atributo.nome }}"><br>
+            Email:
+            <input type="text" name="email" value="{{ atributo.email }}"><br>
+            Telefone:
+            <input type="number" name="telefone" value="{{ atributo.telefone }}"><br>
+            Senha:
+            <input type="password" name="senha" value="{{ atributo.senha }}"><br>
+            <input type="hidden" name="id_usuario_edit" value="{{ atributo.id_usuario }}">
+            <input type="submit" value="EDITAR">
+        </form>
+    {% endfor %}
+</body>
+</html>

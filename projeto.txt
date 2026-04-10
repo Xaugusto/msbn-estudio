@@ -1,0 +1,48 @@
+BANCO DE DADOS:
+    TABELAs:
+        usuarios(id_usuario, nome, email, telefone, senha)
+        horarios(id_agendamento,hora/dia/mes/ano)
+BACK-END:
+    usuario:
+        Perfil:
+            editar informacoes sobre o usuario e deletar a propia conta tambem
+        Agendamento Por Horario e Dia:
+        verificacao de loguin;
+        cadastro;
+            nome
+            email 
+            senha
+            telefone
+        No maximo 2 horas por dia;
+            dia e Horario
+        Pesquisa por data;
+            pesquisas por dia e Horario
+        Pagamento;
+            lancar para o banco depois de clicar em finalizar
+    admin
+
+FRONT-END:
+    Telas:
+    Pagina principal:
+    header com loguin caso nao esteja logado 
+    se estiver logado nao aparece nada c nao aparece o Botao de Loguin
+    Tela de cadastro;
+        caixas para:
+        email
+        senha
+        telefone
+        header com logo da pagina
+    Tela de perfil:
+        Podendo ser alterada as informacoes da conta ou deletada a conta
+    Tela de Loguin:
+        email
+        senha
+    Tela De Pesquisa;
+        caixas para
+        dia
+        horas
+        header com logo da pagina
+    Tela pagamento:
+        iformacoes do Agendamento
+        botao comfirmar
+    Mesmo rodape para todas as paginas;

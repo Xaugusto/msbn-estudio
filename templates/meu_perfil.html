@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Senha</th>
+        </tr>
+        <tr>
+            {% for atributo in atributos %}
+                <td>{{ atributo.nome }}</td>
+                <td>{{ atributo.email }}</td>
+                <td>{{ atributo.telefone }}</td>
+                <td>{{ atributo.senha }}</td>
+                <td>
+                    <form action="/pagina_edit_user" method="post">
+                        <input type="hidden" name="id_edit_user" value="{{ atributo.id_usuario }}">
+                        <input type="submit" value="EDITAR CONTA">
+                    </form>
+                </td>
+                <td>
+                    <form action="/del_user" method="post">
+                        <input type="hidden" name="id_del_user" value="{{ atributo.id_usuario }}">
+                        <input type="submit" value="DELETAR CONTA">
+                    </form>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <a href="/">Pagina Principal</a>
+</body>
+</html>

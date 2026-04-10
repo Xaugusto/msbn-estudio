@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Hora Inicio</th>
+            <th>Hora Termino</th>
+            <th>Dia</th>
+            <th>Mes</th>
+            <th>Ano</th>
+        </tr>
+        {% for agenda in agendas %}
+        <tr>
+            <td>{{ agenda.hora_inicio }}</td>
+            <td>{{ agenda.hora_termino }}</td>
+            <td>{{ agenda.dia }}</td>
+            <td>{{ agenda.mes }}</td>
+            <td>{{ agenda.ano }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="pagina_agendamentos">Agendar</a>
+</body>
+</html>

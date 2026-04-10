@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/agendamentos" method="post">
+        <label>Hora de Inicio:</label>
+        <select name="hora_inicio">
+            {% for horario in horarios %}
+                {% if horario.horas == 800 %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% elif horario.horas == 900 %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% elif horario.horas == 1800 %}
+
+                {% else %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% endif %}
+            {% endfor %}
+        </select><br>
+        <label for="">Hora de Temino:</label>
+        <select name="hora_termino">
+            {% for horario in horarios %}
+                {% if horario.horas == 800 %}
+                    
+                {% elif horario.horas == 900 %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% elif horario.horas == 1800 %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% else %}
+                    <option value='{{ horario.horas }}'>{% set hora_formatada = "%04d" | format(horario.horas) %}{{ hora_formatada[:2] }}:{{ hora_formatada[2:] }}</option>
+                {% endif %}
+            {% endfor %}
+        </select><br>
+        <input type="date" name="data_agend"><br>
+        <input type="submit" value="ENVIAR">
+    </form>
+</body>
+</html>

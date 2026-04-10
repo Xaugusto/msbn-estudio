@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if delete == 1 %}
+        <p>Agendamento Deletado</p>
+    {% endif %}
+    <h1>Meus Agendamentos</h1>
+    <table>
+        <tr>
+            <th>Hora Inicio</th>
+            <th>Hora Termino</th>
+            <th>Dia</th>
+            <th>Mes</th>
+            <th>Ano</th>
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.hora_inicio }}</td>
+            <td>{{ usuario.hora_termino }}</td>
+            <td>{{ usuario.dia }}</td>
+            <td>{{ usuario.mes }}</td>
+            <td>{{ usuario.ano }}</td>
+            <td>
+                <form action="/del_agend" method="post">
+                    <input type="hidden" name="id_delete" value="{{ usuario.id_horarios }}">
+                    <input type="submit" value="CANCELAR">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/pagina_agendamentos">Agendar</a><br>
+    <a href="/">Pagina Principal</a>
+</body>
+</html>
