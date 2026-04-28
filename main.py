@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, session, url_for, redirect
 import mysql.connector
 from mysql.connector import Error
 from conexao import con
+from datetime import datetime
+import re
 
 app = Flask(__name__)
 
@@ -89,14 +91,10 @@ def consul_page_agend():
 @app.route('/consulta_agend', methods=['POST'])
 def consul_agend():
     data = request.form.get('data_agend')
-    data_split = data.split('-')
 
-    dia_consulta = int(data_split[2])
-    mes_consulta = int(data_split[1])
-    ano_consulta = int(data_split[0])
 
-    sql_consulta_agend = "SELECT * FROM agendamentos where dia = %s and mes = %s and ano = %s"
-    valores_consulta_agend = (dia_consulta, mes_consulta, ano_consulta)
+    sql_consulta_agend = "SELECT * FROM agendamentos where data = %s"
+    valores_consulta_agend = (data,) 
 
     cursor = con.cursor(dictionary=True)
     cursor.execute(sql_consulta_agend, valores_consulta_agend)
@@ -104,37 +102,36 @@ def consul_agend():
     valor_consulta = cursor.fetchall() or 0
 
     if valor_consulta != 0:
-        return render_template('data.html', agendas = valor_consulta)
+        return render_template('data.html', agendas = valor_consulta, data = data)
     else:
         return render_template('nenhum_horario.html')
+    
 
-
-@app.route('/pagina_agendamentos')
+@app.route('/pagina_agendamentos', methods=['POST'])
 def agendamentos_page():
     sql_horarios = "Select * From horarios"
+    data = request.form.get('data_agend')
 
     cursor = con.cursor(dictionary=True)
     cursor.execute(sql_horarios)
 
     hora_sql = cursor.fetchall()
     
-    return render_template('agendamentos.html', horarios = hora_sql)
+    return render_template('agendamentos.html', horarios = hora_sql, data = data)
     
 """ Rota Agendamentos"""
 
 @app.route('/agendamentos', methods=['POST'])
 def inserir_agendamentos():
     data = request.form.get('data_agend')
-    data_split = data.split('-')
-    dia_agend = int(data_split[2])
-    mes_agend = int(data_split[1])
-    ano_agend = int(data_split[0])
+
     
-    agend_hora_init = int(request.form.get('hora_inicio'))
-    agend_hora_end = int(request.form.get('hora_termino'))
+    agend_hora_init = datetime.strptime(request.form.get('hora_inicio'), "%H:%M").time()
+    agend_hora_end = datetime.strptime(request.form.get('hora_termino'), "%H:%M").time()
+
     
-    sql_consulta_agend_script = "SELECT * FROM agendamentos where dia = %s and mes = %s and ano = %s"
-    valores_consulta_agend_script = (dia_agend, mes_agend, ano_agend)
+    sql_consulta_agend_script = "SELECT * FROM agendamentos where data = %s"
+    valores_consulta_agend_script = (data,)
 
     cursor = con.cursor(dictionary=True)
     cursor.execute(sql_consulta_agend_script, valores_consulta_agend_script)
@@ -142,15 +139,34 @@ def inserir_agendamentos():
     hora_permitido = False
 
     horarios_banco = cursor.fetchall()
-    for h in horarios_banco:
-        if agend_hora_init < h['hora_termino'] and agend_hora_end > h['hora_inicio']:
-            hora_permitido = True
-            break
 
+    for h in horarios_banco:
+        def normalizar_hora(valor):
+            if isinstance(valor, str):
+                return datetime.strptime(valor, "%H:%M:%S").time()
+            elif isinstance(valor, timedelta):
+                return (datetime.min + valor).time()
+            else:
+                return valor
+        hora_inicio_agendado = normalizar_hora(h['hora_inicio'])
+        hora_termino_agendado = normalizar_hora(h['hora_termino'])
+        if (agend_hora_init >= hora_inicio_agendado and agend_hora_init < hora_termino_agendado) or (agend_hora_end > hora_inicio_agendado and agend_hora_end <= hora_termino_agendado) or (agend_hora_init <= hora_inicio_agendado and agend_hora_end >= hora_termino_agendado):
+            hora_permitido = True
+        
     if hora_permitido:
-        return render_template('erro_agend.html') 
+        return render_template('horario_indisponivel.html')
     else:
-        return render_template('agendado.html', var=1)
+        sql_agendamento = "INSERT INTO agendamentos (id_cliente, hora_inicio, hora_termino, data) VALUES (%s, %s, %s, %s)"
+        valor_agendamento = (session.get('id_user'), agend_hora_init, agend_hora_end, data)
+
+        cursor = con.cursor()
+        cursor.execute(sql_agendamento, valor_agendamento)
+        con.commit()
+
+        if cursor.rowcount > 0:
+            return render_template('data.html', agendado = 1)
+        else:
+            return render_template('erro_agendamento.html')
 
 """ Rota de Consulta Agendamentos Do Usuario """
 

@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    {{ if agendado == 1}}
+        <p>Agendamento Realizado com Sucesso!</p>
+    {{ endif }}
     <table>
         <tr>
             <th>Hora Inicio</th>
@@ -24,6 +27,9 @@
         </tr>
         {% endfor %}
     </table>
-    <a href="pagina_agendamentos">Agendar</a>
+    <form action="pagina_agendamentos" method="post">
+        <input type="hidden" name="data_agend" value="{{ data }}">
+        <input type="submit" value="Agendar">
+    </form>
 </body>
 </html>
