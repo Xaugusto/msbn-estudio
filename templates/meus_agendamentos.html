@@ -1,41 +1,86 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meus Agendamentos - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% if delete == 1 %}
-        <p>Agendamento Deletado</p>
-    {% endif %}
-    <h1>Meus Agendamentos</h1>
-    <table>
-        <tr>
-            <th>Hora Inicio</th>
-            <th>Hora Termino</th>
-            <th>Dia</th>
-            <th>Mes</th>
-            <th>Ano</th>
-        </tr>
-        {% for usuario in usuarios %}
-        <tr>
-            <td>{{ usuario.hora_inicio }}</td>
-            <td>{{ usuario.hora_termino }}</td>
-            <td>{{ usuario.dia }}</td>
-            <td>{{ usuario.mes }}</td>
-            <td>{{ usuario.ano }}</td>
-            <td>
-                <form action="/del_agend" method="post">
-                    <input type="hidden" name="id_delete" value="{{ usuario.id_horarios }}">
-                    <input type="submit" value="CANCELAR">
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <a href="/pagina_agendamentos">Agendar</a><br>
-    <a href="/">Pagina Principal</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2 class="card-title">📅 Meus Agendamentos</h2>
+            </div>
+
+            <!-- DELETE MESSAGE -->
+            {% if delete == 1 %}
+                <div class="alert alert-success">
+                    ✓ Agendamento cancelado com sucesso!
+                </div>
+            {% endif %}
+
+            <!-- AGENDAMENTOS TABLE -->
+            <div class="card-body p-3">
+                {% if usuarios %}
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>📅 Data</th>
+                                    <th>🕐 Hora Início</th>
+                                    <th>🕐 Hora Término</th>
+                                    <th>⚙️ Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in usuarios %}
+                                    <tr>
+                                        <td>{{ usuario.data }}</td>
+                                        <td>{{ usuario.hora_inicio }}</td>
+                                        <td>{{ usuario.hora_termino }}</td>
+                                        <td>
+                                            <form action="/del_agend" method="post" style="display: inline;">
+                                                <input type="hidden" name="id_delete" value="{{ usuario.id_horarios }}">
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja cancelar este agendamento?')">Cancelar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        ℹ️ Você não possui agendamentos no momento.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="card-footer">
+                <div class="flex-between gap-2">
+                    <a href="/pagina_consulta_agend" class="btn btn-primary">Novo Agendamento</a>
+                    <a href="/" class="btn btn-outline">Voltar ao Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

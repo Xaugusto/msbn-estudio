@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Consultar Agendamentos - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <form action="/consulta_agend" method="post">
-        Consulte c o a Data que vc Quer tem horario Disponivel<br>
-        <input type="date" name = "data_agend"><br>
-        <input type="submit" value="Enviar">
-    </form>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-md">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2 class="card-title">📅 Consultar Horários Disponíveis</h2>
+            </div>
+
+            <div class="card-body p-3">
+                <p class="text-center mb-3">Selecione a data para visualizar os horários disponíveis</p>
+                
+                <form action="/consulta_agend" method="post">
+                    <div class="form-group">
+                        <label for="data_agend">📆 Selecione a Data</label>
+                        <input type="date" id="data_agend" name="data_agend" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Verificar Disponibilidade</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-outline">Voltar ao Home</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

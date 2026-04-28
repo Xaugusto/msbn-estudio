@@ -1,21 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <a href="/pagina_cadastro">LINK CADASTRO</a><br>
-    {% if id != none %}
-        <p>Logado</p>
-        <p>{{ nome }}</p>
-        <p>{{ id }}</p>
-        <a href="/logout">Logout</a>
-        <br>
-        <a href="/pagina_consulta_agend">Ver Horarios</a>
-        <a href="/meus_agend">Meus agendametos</a>
-        <a href="/perfil_user">Meu Perfil</a>
-    {% endif %}
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="flex-between" style="width: auto; gap: 2rem;">
+                {% if id != none %}
+                    <div class="user-section">
+                        <span>Bem-vindo, {{ nome }}!</span>
+                        <a href="/logout" class="logout-btn">Sair</a>
+                    </div>
+                {% else %}
+                    <ul class="navbar-menu">
+                        <li class="navbar-item"><a href="/loguin">Entrar</a></li>
+                        <li class="navbar-item"><a href="/pagina_cadastro">Cadastro</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        {% if id != none %}
+            <!-- HERO SEÇÃO PARA USUÁRIO LOGADO -->
+            <section class="hero">
+                <h1>Bem-vindo ao Estúdio!</h1>
+                <p>Gerencie seus agendamentos de forma prática e segura</p>
+            </section>
+
+            <!-- OPÇÕES DE AGENDAMENTO -->
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📅 Agendar Horário</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Escolha um horário disponível e reserve seu serviço</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/pagina_consulta_agend" class="btn btn-primary btn-block">Ver Horários</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📝 Meus Agendamentos</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Visualize e gerencie seus agendamentos confirmados</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/meus_agend" class="btn btn-tertiary btn-block">Acessar</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">👤 Meu Perfil</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Atualize seus dados e informações pessoais</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/perfil_user" class="btn btn-secondary btn-block">Editar Perfil</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <!-- HERO SEÇÃO PARA VISITANTE -->
+            <section class="hero">
+                <h1>Bem-vindo ao Estúdio!</h1>
+                <p>Gerencie seus agendamentos de forma prática e segura</p>
+                <div class="flex-center gap-2">
+                    <a href="/loguin" class="btn btn-secondary">Fazer Login</a>
+                    <a href="/pagina_cadastro" class="btn btn-outline">Criar Conta</a>
+                </div>
+            </section>
+
+            <!-- INFO CARDS -->
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🔐 Seguro</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Sua conta e dados estão completamente protegidos</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">⚡ Rápido</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Agendamento rápido em poucos cliques</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📱 Responsivo</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Funciona em qualquer dispositivo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="card text-center mt-3">
+                <div class="card-header">
+                    <h2>Comece agora mesmo!</h2>
+                </div>
+                <div class="card-body">
+                    <p>Crie sua conta e tenha acesso a todos os recursos do nosso sistema</p>
+                </div>
+                <div class="card-footer">
+                    <a href="/pagina_cadastro" class="btn btn-primary">Cadastrar-se</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>

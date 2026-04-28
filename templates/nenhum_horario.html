@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nenhum Horário - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Nenhum Horario Marcado para esse dia</h1>
-    <a href="pagina_agendamentos">Agendar</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+        </div>
+    </nav>
+
+    <!-- INFO CONTENT -->
+    <div class="container-sm">
+        <div class="card mt-3">
+            <div class="alert alert-info">
+                <h2>ℹ️ Nenhum Horário Disponível</h2>
+                <p>Não há horários marcados para este dia. Selecione outra data para agendar.</p>
+            </div>
+
+            <div class="card-footer text-center gap-2" style="display: flex; justify-content: center; gap: 1rem;">
+                <a href="/pagina_consulta_agend" class="btn btn-primary">Consultar Outras Datas</a>
+                <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

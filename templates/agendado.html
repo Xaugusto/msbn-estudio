@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agendamento Confirmado - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% if var != none %}
-    <p>Agendado!</p>
-    {% else %}
-    <p></p>
-    {% endif %}
-    <a href="/meus_agend">Meus Agendamentos</a>
-    <a href="/pagina_agendamentos">Agendar mais</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="container-md">
+        <div class="card mt-3">
+            {% if var != none %}
+                <div class="alert alert-success">
+                    <h2>✓ Agendamento Realizado com Sucesso!</h2>
+                    <p>Seu agendamento foi confirmado. Você pode acompanhá-lo na seção "Meus Agendamentos".</p>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <h2>ℹ️ Agendamento em Processamento</h2>
+                </div>
+            {% endif %}
+
+            <div class="card-footer text-center gap-2" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="/meus_agend" class="btn btn-primary">Meus Agendamentos</a>
+                <a href="/pagina_consulta_agend" class="btn btn-secondary">Agendar Mais</a>
+                <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

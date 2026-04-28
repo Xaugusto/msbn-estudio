@@ -1,39 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meu Perfil - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Senha</th>
-        </tr>
-        <tr>
-            {% for atributo in atributos %}
-                <td>{{ atributo.nome }}</td>
-                <td>{{ atributo.email }}</td>
-                <td>{{ atributo.telefone }}</td>
-                <td>{{ atributo.senha }}</td>
-                <td>
-                    <form action="/pagina_edit_user" method="post">
-                        <input type="hidden" name="id_edit_user" value="{{ atributo.id_usuario }}">
-                        <input type="submit" value="EDITAR CONTA">
-                    </form>
-                </td>
-                <td>
-                    <form action="/del_user" method="post">
-                        <input type="hidden" name="id_del_user" value="{{ atributo.id_usuario }}">
-                        <input type="submit" value="DELETAR CONTA">
-                    </form>
-                </td>
-            {% endfor %}
-        </tr>
-    </table>
-    <a href="/">Pagina Principal</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2 class="card-title">👤 Meu Perfil</h2>
+            </div>
+
+            <!-- PROFILE TABLE -->
+            <div class="card-body p-3">
+                {% if atributos %}
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>📝 Nome</th>
+                                    <th>📧 Email</th>
+                                    <th>📱 Telefone</th>
+                                    <th>🔐 Senha</th>
+                                    <th>⚙️ Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for atributo in atributos %}
+                                    <tr>
+                                        <td>{{ atributo.nome }}</td>
+                                        <td>{{ atributo.email }}</td>
+                                        <td>{{ atributo.telefone }}</td>
+                                        <td>••••••••</td>
+                                        <td>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <form action="/pagina_edit_user" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id_edit_user" value="{{ atributo.id_usuario }}">
+                                                    <button type="submit" class="btn btn-warning">Editar</button>
+                                                </form>
+                                                <form action="/del_user" method="post" style="display: inline;">
+                                                    <input type="hidden" name="id_del_user" value="{{ atributo.id_usuario }}">
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar sua conta? Esta ação é irreversível!')">Deletar</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="card-footer">
+                <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio - Sistema de Agendamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="#features">Recursos</a></li>
+                <li class="navbar-item"><a href="#about">Sobre</a></li>
+                <li class="navbar-item"><a href="/loguin">Entrar</a></li>
+                <li class="navbar-item"><a href="/pagina_cadastro" class="btn btn-secondary">Cadastro</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Gerencie seus Agendamentos com Facilidade</h1>
+            <p>Plataforma moderna e intuitiva para agendamentos de serviços em estúdio</p>
+            <div class="flex-center gap-2">
+                <a href="/loguin" class="btn btn-secondary">Fazer Login</a>
+                <a href="/pagina_cadastro" class="btn btn-outline">Criar Conta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="container">
+        <h2 class="text-center mb-3">Por que Escolher Nosso Serviço?</h2>
+        <div class="grid grid-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📅 Agendamentos Simples</h3>
+                </div>
+                <div class="card-body">
+                    <p>Agende seus horários de forma rápida e prática. Interface intuitiva que facilita a reserva de seu tempo.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">🔒 Seguro e Confiável</h3>
+                </div>
+                <div class="card-body">
+                    <p>Seus dados são protegidos com segurança. Gerencie sua conta e agendamentos com total tranquilidade.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📱 Responsivo</h3>
+                </div>
+                <div class="card-body">
+                    <p>Acesse de qualquer dispositivo. Desktop, tablet ou smartphone, nosso sistema funciona perfeitamente.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">⏰ Horários Disponíveis</h3>
+                </div>
+                <div class="card-body">
+                    <p>Visualize todos os horários disponíveis em tempo real e escolha o melhor para você.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">👤 Perfil Personalizado</h3>
+                </div>
+                <div class="card-body">
+                    <p>Manage seu perfil com facilidade. Atualize informações e visualize seu histórico de agendamentos.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📞 Suporte Dedicado</h3>
+                </div>
+                <div class="card-body">
+                    <p>Equipe pronta para ajudar com qualquer dúvida. Estamos aqui para tornar sua experiência melhor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="container mt-3">
+        <div class="card">
+            <div class="card-header">
+                <h2>Sobre o Sistema</h2>
+            </div>
+            <div class="card-body">
+                <p>Nosso sistema de agendamento foi desenvolvido para proporcionar uma experiência simples e eficiente. Com uma interface moderna e intuitiva, você consegue gerenciar todos os seus compromissos de forma rápida e prática.</p>
+                <p>Se você trabalha em um estúdio e precisa gerenciar agendamentos de clientes, nossa plataforma é a solução perfeita para você.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="container mt-3 text-center">
+        <div class="card">
+            <h3>Pronto para começar?</h3>
+            <p>Crie sua conta agora e tenha acesso a todos os recursos do nosso sistema.</p>
+            <a href="/pagina_cadastro" class="btn btn-primary">Cadastre-se Agora</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos. Todos os direitos reservados.</p>
+        <p>Desenvolvido com ❤️ para facilitar sua vida</p>
+    </footer>
+</body>
+</html>

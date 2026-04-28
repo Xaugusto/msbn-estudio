@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro Realizado - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% if id == 1 %}
-        <p>Usuario {{nome}} Cadastrado! Vá a Pagina de Loguin</p>
-        <a href="/loguin">Loguin</a>
-        <p>{{ script }}</p>
-    {% endif %}
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+        </div>
+    </nav>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="container-md">
+        {% if id == 1 %}
+            <div class="card mt-3">
+                <div class="alert alert-success">
+                    <h2>✓ Cadastro Realizado com Sucesso!</h2>
+                    <p>Parabéns {{ nome }}, sua conta foi criada com sucesso!</p>
+                    <p>Agora você pode fazer login com suas credenciais.</p>
+                </div>
+
+                <div class="card-footer text-center gap-2" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <a href="/loguin" class="btn btn-primary">Fazer Login</a>
+                    <a href="/" class="btn btn-outline">Voltar ao Home</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

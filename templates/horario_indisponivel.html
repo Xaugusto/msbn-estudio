@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Horário Indisponível - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <p>Horário Indisponível</p><br>
-    <a href="/pagina_agendamentos">Escolha outro horário!</a>
-    <a href="/pagina_consulta">Consulte os horários disponíveis</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+        </div>
+    </nav>
+
+    <!-- WARNING CONTENT -->
+    <div class="container-sm">
+        <div class="card mt-3">
+            <div class="alert alert-warning">
+                <h2>⚠️ Horário Indisponível</h2>
+                <p>O horário selecionado não está disponível. Escolha outro horário ou consulte os horários disponíveis.</p>
+            </div>
+
+            <div class="card-footer text-center gap-2" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="/pagina_consulta_agend" class="btn btn-primary">Consultar Horários</a>
+                <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

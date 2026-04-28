@@ -1,21 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agendar - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <p>Data: {{ data }}</p>
-    <form action="/agendamentos" method="post">
-        <label>Hora de Inicio:</label>
-        <input type="time" name="hora_inicio" min="08:00" max="17:00" step="3600" required><br>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
 
-        <label for="">Hora de Temino:</label>
-        <input type="time" name="hora_termino" min="09:00" max="18:00" step="3600" required><br>
+    <!-- BOOKING FORM -->
+    <div class="container-md">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2 class="card-title">📅 Agendar Horário</h2>
+                <p class="text-muted">Data: <strong>{{ data }}</strong></p>
+            </div>
 
-        <input type="hidden" name="data_agend" value="{{ data }}"><br>
-        <input type="submit" value="ENVIAR">
-    </form>
+            <div class="card-body p-3">
+                <form action="/agendamentos" method="post">
+                    <div class="form-group">
+                        <label for="hora_inicio">🕐 Hora de Início</label>
+                        <input type="time" id="hora_inicio" name="hora_inicio" min="08:00" max="17:00" step="3600" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora_termino">🕐 Hora de Término</label>
+                        <input type="time" id="hora_termino" name="hora_termino" min="09:00" max="18:00" step="3600" required>
+                    </div>
+
+                    <input type="hidden" name="data_agend" value="{{ data }}">
+
+                    <button type="submit" class="btn btn-primary btn-block">Confirmar Agendamento</button>
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <a href="/pagina_consulta_agend" class="btn btn-outline">Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
+</html>
 </html>

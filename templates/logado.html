@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Logado - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <p>Logado!</p>
-    <p>{{ nome }}</p>
-    <p>{{ id }}</p>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/" class="logout-btn">Voltar ao Home</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- LOGIN SUCCESS -->
+    <div class="container-md">
+        <div class="card mt-3">
+            <div class="alert alert-success">
+                <h2>✓ Login Realizado com Sucesso!</h2>
+                <p>Bem-vindo, <strong>{{ nome }}</strong>!</p>
+            </div>
+
+            <div class="card-footer text-center gap-2" style="display: flex; justify-content: center; gap: 1rem;">
+                <a href="/" class="btn btn-primary">Ir para Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

@@ -1,23 +1,71 @@
 <!DOCTYPE html>
-<html lang="pr-bt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Faça Loguin Caso ja Tenha conta <a href="/loguin">Loguin</a></h1>
-    <form action="/cadastro_sql" method="post">
-        Nome:
-        <input type="text" name="nome"><br>
-        Email:
-        <input type="text" name="email"><br>
-        Telefone:
-        <input type="number" name="telefone"><br>
-        Senha:
-        <input type="password" name="senha"><br>
-        <input type="submit">
-    </form>
-    <a href="/">Pagina principal</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/loguin">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- REGISTRO FORM -->
+    <div class="container-sm">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2 class="card-title">Criar Conta</h2>
+            </div>
+
+            <div class="card-body p-3">
+                <p class="text-center mb-3">Preencha os dados abaixo para criar sua conta</p>
+                
+                <form action="/cadastro_sql" method="post">
+                    <div class="form-group">
+                        <label for="nome">👤 Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">📧 Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Seu email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">📱 Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">🔐 Senha</label>
+                        <input type="password" id="senha" name="senha" required placeholder="Escolha uma senha forte">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                </form>
+            </div>
+
+            <div class="card-footer text-center">
+                <p>Já tem conta? <a href="/loguin">Faça login aqui</a></p>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-outline">Voltar ao Home</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
 </body>
 </html>

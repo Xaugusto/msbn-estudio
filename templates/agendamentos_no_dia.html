@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos do Dia - Estúdio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <div class="navbar-menu">
+                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SCHEDULES LIST -->
+    <div class="container-md">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2 class="card-title">📅 Agendamentos do dia {{ data }}</h2>
+            </div>
+
+            <div class="card-body p-3">
+                {% if agendas %}
+                    <div class="alert alert-info">
+                        Horários indisponíveis para agendamento:
+                    </div>
+                    <div class="grid grid-2">
+                        {% for agenda in agendas %}
+                            <div class="card">
+                                <div class="card-body text-center p-3">
+                                    <h4>🕐 {{ agenda.hora_inicio }} - {{ agenda.hora_termino }}</h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        ⚠️ Nenhum horário disponível para esta data.
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="card-footer">
+                <a href="/pagina_consulta_agend" class="btn btn-outline">Voltar</a>
+                <form action="/pagina_agendamentos" method="POST" style="display: inline;">
+                    <input type="hidden" name="data_agend" value="{{ data }}">
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+    </footer>
+</body>
+</html>
