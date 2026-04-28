@@ -130,38 +130,31 @@ def agendamentos_page():
 @app.route('/agendamentos', methods=['POST'])
 def inserir_agendamentos():
     data = request.form.get('data_agend')
-
-    
     agend_hora_init = request.form.get('hora_inicio')
     agend_hora_end = request.form.get('hora_termino')
-
     
-    sql_consulta_agend_script = "SELECT * FROM agendamentos where data = %s"
-    valores_consulta_agend_script = (data,)
-
+    # Verificar conflitos
     cursor = con.cursor(dictionary=True)
-    cursor.execute(sql_consulta_agend_script, valores_consulta_agend_script)
-
-
+    cursor.execute("SELECT hora_inicio, hora_termino FROM agendamentos WHERE data = %s", (data,))
     horarios_banco = cursor.fetchall()
-
-    for horario_banco in horarios_banco:
-        hora1 = str(horario_banco['hora_inicio'])
-        hora2 = str(horario_banco['hora_termino'])
-
-        if agend_hora_init >= hora1 and agend_hora_init < hora2:
+    
+    for horario in horarios_banco:
+        # Converter timedelta para string (HH:MM:SS)
+        hora_banco_init = str(horario['hora_inicio'])
+        hora_banco_end = str(horario['hora_termino'])
+        
+        # Conflito: novo_init < banco_end E novo_end > banco_init
+        if agend_hora_init < hora_banco_end and agend_hora_end > hora_banco_init:
             return render_template('erro_agendamento.html')
-        elif agend_hora_end > hora1 and agend_hora_end <= hora2:
-            return render_template('erro_agendamento.html')
-        else:
-            sql_agendamento = "INSERT INTO agendamentos (data, hora_inicio, hora_termino, id_cliente) VALUES (%s, %s, %s, %s)"
-            valor_agendamento = (data, agend_hora_init, agend_hora_end, session.get('id_user'))
-
-            cursor = con.cursor()
-            cursor.execute(sql_agendamento, valor_agendamento)
-            con.commit()
-
-            return render_template('agendado.html')
+    
+    # Sem conflitos - inserir
+    cursor.execute(
+        "INSERT INTO agendamentos (data, hora_inicio, hora_termino, id_cliente) VALUES (%s, %s, %s, %s)",
+        (data, agend_hora_init, agend_hora_end, session.get('id_user'))
+    )
+    con.commit()
+    
+    return render_template('agendado.html')
 
 """ Rota de Consulta Agendamentos Do Usuario """
 
@@ -268,9 +261,64 @@ def user_delete():
 
 #Rotas Para ADM
 
+@app.route('/pagina_admin')
+def admin_page():    
+    return render_template('pagina_admin.html')
+
+@app.route('/pagina_listagem_users')
+def listagem_users():
+    sql_listagem = "SELECT * FROM usuario"
+    cursor = con.cursor(dictionary=True)
+    cursor.execute(sql_listagem)
+    listagem = cursor.fetchall()
+
+    return render_template('listagem_users.html', usuarios = listagem)
+
+@app.route('/pagina_listagem_agend')
+def listagem_agend():
+    sql_listagem = "SELECT * FROM agendamentos"
+    cursor = con.cursor(dictionary=True)
+    cursor.execute(sql_listagem,)
+    listagem = cursor.fetchall()
+
+    return render_template('listagem_agendamentos.html', agendas = listagem)
+
+@app.route('/del_user_admin', methods = ['POST'])
+def del_user_admin():
+    id_delete_user = request.form.get('id_del_user')
+
+    sql_delete_agend = "DELETE FROM usuario WHERE id_usuario = (%s)"
+    valor_del_agend = (id_delete_user,)
+
+    cursor = con.cursor()
+    cursor.execute(sql_delete_agend, valor_del_agend)
+    con.commit()
+
+    if cursor.rowcount > 0:
+        return redirect(url_for('listagem_users'))
+    else:
+        return render_template('erro_del_conta.html')
+
+@app.route('/del_agend_admin', methods = ['POST'])
+def del_agend_admin():
+    id_delete_agend = request.form.get('id_del_agend')
+
+    sql_delete_agend = "DELETE FROM agendamentos WHERE id_horarios = (%s)"
+    valor_del_agend = (id_delete_agend,)
+
+    cursor = con.cursor()
+    cursor.execute(sql_delete_agend, valor_del_agend)
+    con.commit()
+
+    if cursor.rowcount > 0:
+        return redirect(url_for('listagem_users'))
+    else:
+        return render_template('erro_del_conta.html')
 
 
-""" Rota para Logout do Usuario """
+
+
+""" Rota para Logout do Usuario Comum e Admin """
 
 @app.route('/logout')
 def logout():
