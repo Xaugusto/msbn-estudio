@@ -1,195 +1,248 @@
-# Estúdio - Sistema de Agendamentos
+<div align="center">
 
-Sistema web desenvolvido em Python com Flask para gerenciamento de agendamentos de um estúdio. Permite que clientes se cadastrem, façam login e marquem horários, enquanto administradores gerenciam usuários e agendamentos.
+# 🎨 Estúdio
+
+### Sistema de Agendamentos para Estúdios
+
+_Cadastre-se, escolha seu horário e pronto. Sem conflitos, sem confusão._
+
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-5.7+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Jinja2](https://img.shields.io/badge/Jinja2-B41717?style=for-the-badge&logo=jinja&logoColor=white)
+![Licença](https://img.shields.io/badge/licença-uso%20livre-brightgreen?style=for-the-badge)
+
+[Funcionalidades](#-funcionalidades) •
+[Instalação](#-instalação) •
+[Como usar](#-como-usar) •
+[Rotas](#-mapa-de-rotas) •
+[Problemas comuns](#-solução-de-problemas)
+
+</div>
+
+---
+
+## 💡 Sobre o projeto
+
+O **Estúdio** é uma aplicação web feita em **Python + Flask** para gerenciar os agendamentos de um estúdio. Clientes criam conta, fazem login e reservam horários com **verificação de conflitos em tempo real**. Já os administradores têm um painel exclusivo para controlar usuários e agendamentos.
+
+```mermaid
+flowchart LR
+    A([Visitante]) --> B[Cadastro]
+    B --> C[Login]
+    C --> D{Perfil?}
+    D -->|Cliente| E[Consultar data]
+    E --> F[Escolher horário]
+    F --> G[Agendamento confirmado ✅]
+    D -->|Admin| H[Painel administrativo]
+    H --> I[Gerenciar usuários]
+    H --> J[Gerenciar agendamentos]
+```
+
+---
 
 ## 🚀 Funcionalidades
 
-### Para Usuários (Clientes)
+<table>
+<tr>
+<td width="50%" valign="top">
 
-- **Cadastro e Autenticação:** Criação de conta, login e logout seguros com controle de sessão
-- **Agendamento de Horários:** Escolha de data e horário (início e término), com verificação de conflitos em tempo real
-- **Gerenciamento de Agendamentos:** Visualização dos agendamentos marcados e opção de cancelamento
-- **Perfil do Usuário:** Visualização, edição de dados pessoais e exclusão de conta
+### 👤 Para clientes
 
-### Para Administradores
+- 🔐 **Cadastro e autenticação** com login, logout e controle de sessão
+- 📅 **Agendamento** com data, hora de início e término
+- ⚡ **Verificação de conflitos** em tempo real
+- 📋 **Meus agendamentos**: visualize e cancele quando quiser
+- 🧑 **Perfil**: veja e edite seus dados ou exclua sua conta
 
-- **Painel Administrativo:** Área restrita para administração do sistema
-- **Gestão de Usuários:** Listagem de todos os usuários cadastrados e opção de exclusão
-- **Gestão de Agendamentos:** Listagem geral de todos os agendamentos do estúdio e opção de cancelamento
+</td>
+<td width="50%" valign="top">
 
-## 🛠️ Tecnologias Utilizadas
+### 🛡️ Para administradores
 
-- **Backend:** Python, Flask
-- **Banco de Dados:** MySQL (`mysql-connector-python`)
-- **Frontend:** HTML, CSS, Templates Jinja2
+- 🖥️ **Painel administrativo** com área restrita
+- 👥 **Gestão de usuários**: lista completa e exclusão
+- 🗓️ **Gestão de agendamentos**: visão geral de todo o estúdio e cancelamento
 
-> **Nota:** O **frontend** (templates HTML, CSS e páginas) foi **gerado por IA**. Os scripts de automação **`install.sh`** e **`run.sh`** também foram **gerados por IA** para facilitar a instalação e execução do projeto.
+</td>
+</tr>
+</table>
+
+---
+
+## 🛠️ Tecnologias
+
+| Camada             | Tecnologia                       |
+| ------------------ | -------------------------------- |
+| **Backend**        | Python, Flask                    |
+| **Banco de dados** | MySQL (`mysql-connector-python`) |
+| **Frontend**       | HTML, CSS, templates Jinja2      |
+
+> 🤖 **Transparência:** o **frontend** (templates HTML, CSS e páginas) e os scripts **`install.sh`** e **`run.sh`** foram **gerados por IA**. O backend e a lógica de negócio são o foco do projeto.
+
+---
 
 ## ⚙️ Pré-requisitos
 
-- Python 3.8+
-- MySQL Server 5.7+ ou MariaDB 10.3+
-- pip (gerenciador de pacotes do Python)
+- 🐍 Python **3.8+**
+- 🗄️ MySQL Server **5.7+** ou MariaDB **10.3+**
+- 📦 pip
+
+---
 
 ## 📦 Instalação
 
-### Opção 1: Instalação Automática (Recomendada)
-
-Execute o script de instalação que configura tudo automaticamente:
+### ⚡ Opção 1: Automática (recomendada)
 
 ```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-### Opção 2: Instalação Manual
+### 🔧 Opção 2: Manual
 
-1. **Clone o repositório** (se aplicável) ou navegue até a pasta do projeto:
+<details>
+<summary><b>Clique para ver o passo a passo</b></summary>
 
-   ```bash
-   cd msbn-estudio
-   ```
+<br>
 
-2. **Crie e ative um ambiente virtual** (recomendado):
+**1. Acesse a pasta do projeto**
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # Linux/macOS
-   # ou
-   venv\Scripts\activate     # Windows
-   ```
+```bash
+cd msbn-estudio
+```
 
-3. **Instale as dependências:**
+**2. Crie e ative um ambiente virtual** _(recomendado)_
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+python3 -m venv venv
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate      # Windows
+```
 
-   Ou instale manualmente:
+**3. Instale as dependências**
 
-   ```bash
-   pip install flask mysql-connector-python
-   ```
+```bash
+pip install -r requirements.txt
+# ou, manualmente:
+pip install flask mysql-connector-python
+```
 
-4. **Configure o Banco de Dados MySQL:**
+**4. Crie o banco de dados**
 
-   Acesse o MySQL:
+```bash
+mysql -u root -p < db.sql
+```
 
-   ```bash
-   mysql -u root -p
-   ```
+Ou, dentro do cliente MySQL:
 
-   Execute o script SQL para criar o banco e as tabelas:
+```sql
+SOURCE db.sql;
+```
 
-   ```sql
-   SOURCE db.sql;
-   ```
+**5. Ajuste a conexão** _(se necessário)_ em `conexao.py`:
 
-   Ou execute diretamente no terminal:
+```python
+con = mysql.connector.connect(
+    host='localhost',
+    database='estudio_db',      # nome do banco criado no db.sql
+    user='root',
+    password='sua_senha_aqui',  # senha do seu MySQL
+    use_pure=True
+)
+```
 
-   ```bash
-   mysql -u root -p < db.sql
-   ```
+</details>
 
-5. **Ajuste as configurações de conexão** (se necessário):
+---
 
-   Edite o arquivo `conexao.py` se seu MySQL tiver configurações diferentes:
+## ▶️ Como executar
 
-   ```python
-   con = mysql.connector.connect(
-       host='localhost',
-       database='estudio_db',  # Nome do banco criado no db.sql
-       user='root',
-       password='sua_senha_aqui',  # Coloque sua senha do MySQL
-       use_pure=True
-   )
-   ```
-
-## ▶️ Como Executar
-
-### Com o script de inicialização:
+**Com o script:**
 
 ```bash
 chmod +x run.sh
 ./run.sh
 ```
 
-### Manualmente:
+**Manualmente:**
 
 ```bash
-# Ative o ambiente virtual (se criou um)
-source venv/bin/activate
-
-# Execute a aplicação
+source venv/bin/activate   # se estiver usando ambiente virtual
 python main.py
 ```
 
-A aplicação estará disponível em: **http://localhost:5000**
+🌐 A aplicação estará disponível em **http://localhost:5000**
 
-## 🌐 Como Usar
+---
 
-### 1. Acesso Inicial
+## 🌐 Como usar
 
-- Acesse `http://localhost:5000` - Página inicial
-- Acesse `http://localhost:5000/landing` - Landing page
+### 🔑 Credenciais de teste
 
-### 2. Cadastro de Usuário
+| Perfil                      | E-mail                                    | Senha                |
+| --------------------------- | ----------------------------------------- | -------------------- |
+| 🛡️ **Administrador** (ID 1) | `admin@estudio.com`                       | `admin123`           |
+| 👤 **Cliente**              | qualquer usuário cadastrado (exceto ID 1) | definida no cadastro |
 
-- Clique em "Cadastrar" ou acesse `/pagina_cadastro`
-- Preencha: Nome, Email, Telefone, Senha
-- Após cadastro, faça login
+> ⚠️ Troque essas credenciais antes de colocar o sistema em produção.
 
-### 3. Login
+### 👤 Fluxo do cliente
 
-- Acesse `/loguin` ou clique em "Entrar"
-- **Usuário comum:** Qualquer usuário cadastrado (exceto ID 1)
-- **Administrador:** Email `admin@estudio.com` / Senha `admin123` (ID 1)
+1. **Cadastre-se** em `/pagina_cadastro` (nome, e-mail, telefone e senha)
+2. **Entre** em `/loguin`
+3. Vá em **Agendar** (`/pagina_consulta_agend`)
+4. Escolha uma **data** e clique em **Consultar**
+5. Selecione um **horário disponível**
+6. Defina **hora de início e término**
+7. **Confirme** ✅
 
-### 4. Agendamento (Usuário Comum)
+### 🛡️ Fluxo do administrador
 
-1. Faça login como usuário comum
-2. Clique em "Agendar" ou acesse `/pagina_consulta_agend`
-3. Escolha uma data e clique em "Consultar"
-4. Selecione um horário disponível
-5. Defina hora de início e término
-6. Confirme o agendamento
+1. Faça login com `admin@estudio.com`
+2. Você será redirecionado automaticamente para `/pagina_admin`
+3. Dali, gerencie usuários e agendamentos pelos botões de listagem
 
-### 5. Painel Administrativo
+---
 
-1. Faça login com: `admin@estudio.com` / `admin123`
-2. Será redirecionado automaticamente para `/pagina_admin`
-3. Opções disponíveis:
-   - **Listar Usuários:** `/pagina_listagem_users`
-   - **Listar Agendamentos:** `/pagina_listagem_agend`
-   - **Excluir Usuário/Agendamento:** Botões na listagem
+## 🗺️ Mapa de rotas
 
-### 6. Perfil do Usuário
+| Rota                     | Descrição                    | Acesso     |
+| ------------------------ | ---------------------------- | ---------- |
+| `/`                      | Página inicial               | 🌍 Público |
+| `/landing`               | Landing page                 | 🌍 Público |
+| `/pagina_cadastro`       | Cadastro de usuário          | 🌍 Público |
+| `/loguin`                | Login                        | 🌍 Público |
+| `/pagina_consulta_agend` | Consultar e agendar horários | 👤 Cliente |
+| `/perfil_user`           | Perfil do usuário            | 👤 Cliente |
+| `/pagina_edit_user`      | Edição de dados pessoais     | 👤 Cliente |
+| `/pagina_admin`          | Painel administrativo        | 🛡️ Admin   |
+| `/pagina_listagem_users` | Listagem de usuários         | 🛡️ Admin   |
+| `/pagina_listagem_agend` | Listagem de agendamentos     | 🛡️ Admin   |
 
-- Acesse `/perfil_user` após login
-- Edite dados em `/pagina_edit_user`
-- Exclua conta se desejar
+---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura do projeto
 
 ```
 msbn-estudio/
-├── main.py                 # Aplicação principal Flask (rotas)
-├── conexao.py              # Conexão com MySQL
-├── db.sql                  # Script de criação do banco de dados
-├── requirements.txt        # Dependências Python
-├── install.sh              # Script de instalação automática (gerado por IA)
-├── run.sh                  # Script de execução (gerado por IA)
-├── templates/              # Templates HTML (Jinja2) - Frontend gerado por IA
+├── main.py              # Aplicação Flask (rotas)
+├── conexao.py           # Conexão com o MySQL
+├── db.sql               # Criação do banco e das tabelas
+├── requirements.txt     # Dependências Python
+├── install.sh           # Instalação automática (gerado por IA)
+├── run.sh               # Execução (gerado por IA)
+├── templates/           # Templates Jinja2 (gerados por IA)
 │   ├── static/css/styles.css
-│   ├── *.html              # Páginas da aplicação
-└── md/                     # Documentação adicional
+│   └── *.html
+└── md/                  # Documentação adicional
 ```
 
-## 🔧 Configurações Importantes
+---
 
-### Variáveis de Ambiente (Produção)
+## 🔧 Configuração para produção
 
-Para produção, configure estas variáveis:
+Defina as variáveis de ambiente:
 
 ```bash
 export FLASK_SECRET_KEY="sua_chave_secreta_super_segura"
@@ -199,53 +252,91 @@ export DB_USER="root"
 export DB_PASSWORD="sua_senha_segura"
 ```
 
-E altere `main.py` e `conexao.py` para usar `os.environ.get()`.
+E altere `main.py` e `conexao.py` para lerem esses valores com `os.environ.get()`.
 
-### Segurança
+### 🔒 Checklist de segurança
 
-- **NÃO use a chave secreta padrão em produção**
-- **NÃO use senha vazia no MySQL em produção**
-- Use HTTPS em produção
-- Considere usar hash de senhas (bcrypt)
+- [ ] Trocar a chave secreta padrão
+- [ ] Definir uma senha forte no MySQL (nunca vazia)
+- [ ] Alterar as credenciais do administrador
+- [ ] Usar HTTPS
+- [ ] Armazenar senhas com hash (ex.: **bcrypt**)
 
-## 🐛 Solução de Problemas
+---
 
-### Erro de conexão com MySQL
+## 🐛 Solução de problemas
+
+<details>
+<summary><b>❌ Erro de conexão com o MySQL</b></summary>
+
+<br>
+
+Verifique se o serviço está rodando:
 
 ```bash
-# Verifique se o MySQL está rodando
-sudo systemctl status mysql  # Linux
-brew services list | grep mysql  # macOS
+sudo systemctl status mysql        # Linux
+brew services list | grep mysql    # macOS
+```
 
-# Inicie se necessário
+Inicie se necessário:
+
+```bash
 sudo systemctl start mysql
 ```
 
-### Erro "Access denied for user 'root'"
+</details>
 
-- Verifique a senha no `conexao.py`
-- Ou crie um usuário dedicado:
-  ```sql
-  CREATE USER 'estudio_user'@'localhost' IDENTIFIED BY 'senha_segura';
-  GRANT ALL PRIVILEGES ON estudio_db.* TO 'estudio_user'@'localhost';
-  FLUSH PRIVILEGES;
-  ```
+<details>
+<summary><b>🚫 Access denied for user 'root'</b></summary>
 
-### Porta 5000 já em uso
+<br>
 
-```bash
-# Mate o processo na porta 5000
-lsof -ti:5000 | xargs kill -9
-# Ou mude a porta no main.py: app.run(debug=True, port=5001)
+Confira a senha em `conexao.py` ou crie um usuário dedicado:
+
+```sql
+CREATE USER 'estudio_user'@'localhost' IDENTIFIED BY 'senha_segura';
+GRANT ALL PRIVILEGES ON estudio_db.* TO 'estudio_user'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
-### Módulo não encontrado
+</details>
+
+<details>
+<summary><b>🔌 Porta 5000 já em uso</b></summary>
+
+<br>
 
 ```bash
-# Reinstale as dependências
+lsof -ti:5000 | xargs kill -9
+```
+
+Ou mude a porta no `main.py`:
+
+```python
+app.run(debug=True, port=5001)
+```
+
+</details>
+
+<details>
+<summary><b>📦 Módulo não encontrado</b></summary>
+
+<br>
+
+```bash
 pip install -r requirements.txt --force-reinstall
 ```
+
+</details>
+
+---
 
 ## 📝 Licença
 
 Este projeto é de uso livre.
+
+<div align="center">
+
+Feito com ☕ e Flask
+
+</div>
