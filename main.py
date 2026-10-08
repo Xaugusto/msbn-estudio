@@ -98,19 +98,16 @@ def consul_page_agend():
 def consul_agend():
     data = request.form.get('data_agend')
 
-
-    sql_consulta_agend = "SELECT * FROM agendamentos where data = %s"
+    sql_consulta_agend = "SELECT * FROM agendamentos WHERE data = %s"
     valores_consulta_agend = (data,) 
 
     cursor = con.cursor(dictionary=True)
     cursor.execute(sql_consulta_agend, valores_consulta_agend)
 
-    valor_consulta = cursor.fetchall() or 0
+    valor_consulta = cursor.fetchall() # Retorna a lista de agendamentos ocupados no dia
 
-    if valor_consulta != 0:
-        return render_template('agendamentos_no_dia.html', agendas = valor_consulta, data = data)
-    else:
-        return render_template('nenhum_horario.html')
+    # Sempre exibe a tela de agendamentos no dia para permitir que o usuário agende
+    return render_template('agendamentos_no_dia.html', agendas=valor_consulta, data=data)
     
 
 @app.route('/pagina_agendamentos', methods=['POST'])
