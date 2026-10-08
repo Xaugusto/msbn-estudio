@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Estúdio</title>
+    <title>Estúdio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio</a>
-            <div class="flex-between" style="width: auto; gap: 2rem;">
+            <a href="/" class="navbar-brand">Estúdio</a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
                 {% if id != none %}
                     <div class="user-section">
-                        <span>Bem-vindo, {{ nome }}!</span>
+                        <span>{{ nome }}</span>
                         <a href="/logout" class="logout-btn">Sair</a>
                     </div>
                 {% else %}
                     <ul class="navbar-menu">
                         <li class="navbar-item"><a href="/loguin">Entrar</a></li>
-                        <li class="navbar-item"><a href="/pagina_cadastro">Cadastro</a></li>
+                        <li class="navbar-item"><a href="/pagina_cadastro">Cadastrar</a></li>
                     </ul>
                 {% endif %}
             </div>
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <div class="container">
         {% if id != none %}
-            <!-- HERO SEÇÃO PARA USUÁRIO LOGADO -->
-            <section class="hero">
-                <h1>Bem-vindo ao Estúdio!</h1>
-                <p>Gerencie seus agendamentos de forma prática e segura</p>
-            </section>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h1 class="card-title">Bem-vindo, {{ nome }}</h1>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Gerencie seus agendamentos de forma prática.</p>
+                </div>
+            </div>
 
-            <!-- OPÇÕES DE AGENDAMENTO -->
-            <div class="grid grid-3">
+            <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">📅 Agendar Horário</h3>
+                        <h3 class="card-title">Agendar Horário</h3>
                     </div>
                     <div class="card-body">
-                        <p>Escolha um horário disponível e reserve seu serviço</p>
+                        <p class="text-muted">Escolha um horário disponível e reserve seu serviço.</p>
                     </div>
                     <div class="card-footer">
                         <a href="/pagina_consulta_agend" class="btn btn-primary btn-block">Ver Horários</a>
@@ -52,87 +52,71 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">📝 Meus Agendamentos</h3>
+                        <h3 class="card-title">Meus Agendamentos</h3>
                     </div>
                     <div class="card-body">
-                        <p>Visualize e gerencie seus agendamentos confirmados</p>
+                        <p class="text-muted">Visualize e gerencie seus agendamentos confirmados.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="/meus_agend" class="btn btn-tertiary btn-block">Acessar</a>
+                        <a href="/meus_agend" class="btn btn-outline btn-block">Acessar</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">👤 Meu Perfil</h3>
+                        <h3 class="card-title">Meu Perfil</h3>
                     </div>
                     <div class="card-body">
-                        <p>Atualize seus dados e informações pessoais</p>
+                        <p class="text-muted">Atualize seus dados e informações pessoais.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="/perfil_user" class="btn btn-secondary btn-block">Editar Perfil</a>
+                        <a href="/perfil_user" class="btn btn-outline btn-block">Editar Perfil</a>
                     </div>
                 </div>
             </div>
         {% else %}
-            <!-- HERO SEÇÃO PARA VISITANTE -->
-            <section class="hero">
-                <h1>Bem-vindo ao Estúdio!</h1>
-                <p>Gerencie seus agendamentos de forma prática e segura</p>
+            <div class="card mb-3 text-center" style="padding: 3rem 1.5rem;">
+                <h1>Estúdio</h1>
+                <p class="text-muted mb-3">Sistema de agendamentos simples e direto.</p>
                 <div class="flex-center gap-2">
-                    <a href="/loguin" class="btn btn-secondary">Fazer Login</a>
-                    <a href="/pagina_cadastro" class="btn btn-outline">Criar Conta</a>
-                </div>
-            </section>
-
-            <!-- INFO CARDS -->
-            <div class="grid grid-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">🔐 Seguro</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Sua conta e dados estão completamente protegidos</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">⚡ Rápido</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Agendamento rápido em poucos cliques</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">📱 Responsivo</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Funciona em qualquer dispositivo</p>
-                    </div>
+                    <a href="/loguin" class="btn btn-primary">Entrar</a>
+                    <a href="/pagina_cadastro" class="btn btn-outline">Cadastrar</a>
                 </div>
             </div>
 
-            <!-- CTA -->
-            <div class="card text-center mt-3">
-                <div class="card-header">
-                    <h2>Comece agora mesmo!</h2>
+            <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Seguro</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Seus dados protegidos com criptografia.</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p>Crie sua conta e tenha acesso a todos os recursos do nosso sistema</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Rápido</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Agendamento em poucos cliques.</p>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="/pagina_cadastro" class="btn btn-primary">Cadastrar-se</a>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Responsivo</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Funciona em qualquer dispositivo.</p>
+                    </div>
                 </div>
             </div>
         {% endif %}
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
     </footer>
 </body>
 </html>

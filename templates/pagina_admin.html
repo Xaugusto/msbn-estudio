@@ -7,31 +7,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio - Admin</a>
+            <a href="/" class="navbar-brand">Estúdio - Admin</a>
             <div class="navbar-menu">
                 <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
             </div>
         </div>
     </nav>
 
-    <!-- ADMIN DASHBOARD -->
     <div class="container">
-        <div class="hero">
-            <h1>🔐 Painel Administrativo</h1>
-            <p>Gerencie agendamentos e usuários do sistema</p>
+        <div class="card mb-3">
+            <div class="card-header">
+                <h1 class="card-title">Painel Administrativo</h1>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Gerencie agendamentos e usuários do sistema.</p>
+            </div>
         </div>
 
-        <!-- ADMIN OPTIONS -->
-        <div class="grid grid-2">
+        <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">📅 Todos os Agendamentos</h3>
+                    <h3 class="card-title">Todos os Agendamentos</h3>
                 </div>
                 <div class="card-body">
-                    <p>Visualize e gerencie todos os agendamentos do sistema</p>
+                    <p class="text-muted">Visualize e gerencie todos os agendamentos.</p>
                 </div>
                 <div class="card-footer">
                     <a href="/pagina_listagem_agend" class="btn btn-primary btn-block">Ver Agendamentos</a>
@@ -40,21 +41,20 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">👥 Todos os Usuários</h3>
+                    <h3 class="card-title">Todos os Usuários</h3>
                 </div>
                 <div class="card-body">
-                    <p>Visualize e gerencie todos os usuários registrados</p>
+                    <p class="text-muted">Visualize e gerencie usuários registrados.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/pagina_listagem_users" class="btn btn-tertiary btn-block">Ver Usuários</a>
+                    <a href="/pagina_listagem_users" class="btn btn-outline btn-block">Ver Usuários</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos | Painel Administrativo</p>
+        <p>&copy; 2024 Estúdio - Painel Administrativo</p>
     </footer>
 </body>
 </html>

@@ -7,42 +7,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <a href="/" class="navbar-brand">Estúdio</a>
             <div class="navbar-menu">
-                <li class="navbar-item"><a href="/">Home</a></li>
+                <li class="navbar-item"><a href="/">Início</a></li>
                 <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
             </div>
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <div class="container">
-        <div class="card mb-3">
+        <div class="card">
             <div class="card-header">
-                <h2 class="card-title">📅 Meus Agendamentos</h2>
+                <h2 class="card-title">Meus Agendamentos</h2>
             </div>
 
-            <!-- DELETE MESSAGE -->
             {% if delete == 1 %}
                 <div class="alert alert-success">
-                    ✓ Agendamento cancelado com sucesso!
+                    Agendamento cancelado com sucesso.
                 </div>
             {% endif %}
 
-            <!-- AGENDAMENTOS TABLE -->
-            <div class="card-body p-3">
+            <div class="card-body">
                 {% if usuarios %}
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>📅 Data</th>
-                                    <th>🕐 Hora Início</th>
-                                    <th>🕐 Hora Término</th>
-                                    <th>⚙️ Ações</th>
+                                    <th>Data</th>
+                                    <th>Início</th>
+                                    <th>Término</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,7 +50,7 @@
                                         <td>
                                             <form action="/del_agend" method="post" style="display: inline;">
                                                 <input type="hidden" name="id_delete" value="{{ usuario.id_horarios }}">
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja cancelar este agendamento?')">Cancelar</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja cancelar este agendamento?')">Cancelar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -64,23 +60,22 @@
                     </div>
                 {% else %}
                     <div class="alert alert-info">
-                        ℹ️ Você não possui agendamentos no momento.
+                        Você não possui agendamentos no momento.
                     </div>
                 {% endif %}
             </div>
 
             <div class="card-footer">
-                <div class="flex-between gap-2">
+                <div class="flex gap-2">
                     <a href="/pagina_consulta_agend" class="btn btn-primary">Novo Agendamento</a>
-                    <a href="/" class="btn btn-outline">Voltar ao Home</a>
+                    <a href="/" class="btn btn-outline">Voltar</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+        <p>&copy; 2024 Estúdio</p>
     </footer>
 </body>
 </html>

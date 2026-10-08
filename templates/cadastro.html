@@ -3,69 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Estúdio</title>
+    <title>Cadastrar - Estúdio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <a href="/" class="navbar-brand">Estúdio</a>
             <ul class="navbar-menu">
-                <li class="navbar-item"><a href="/">Home</a></li>
-                <li class="navbar-item"><a href="/loguin">Login</a></li>
+                <li class="navbar-item"><a href="/">Início</a></li>
+                <li class="navbar-item"><a href="/loguin">Entrar</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- REGISTRO FORM -->
     <div class="container-sm">
-        <div class="card mt-3">
+        <div class="card">
             <div class="card-header">
                 <h2 class="card-title">Criar Conta</h2>
             </div>
 
-            <div class="card-body p-3">
-                <p class="text-center mb-3">Preencha os dados abaixo para criar sua conta</p>
-                
+            <div class="card-body">
+                <p class="text-center text-muted mb-3">Preencha os dados abaixo</p>
+
                 <form action="/cadastro_sql" method="post">
                     <div class="form-group">
-                        <label for="nome">👤 Nome Completo</label>
-                        <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Seu nome" autocomplete="name">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">📧 Email</label>
-                        <input type="email" id="email" name="email" required placeholder="Seu email">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com" autocomplete="email">
                     </div>
 
                     <div class="form-group">
-                        <label for="telefone">📱 Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX" autocomplete="tel">
                     </div>
 
                     <div class="form-group">
-                        <label for="senha">🔐 Senha</label>
-                        <input type="password" id="senha" name="senha" required placeholder="Escolha uma senha forte">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" required placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
                 </form>
             </div>
 
             <div class="card-footer text-center">
-                <p>Já tem conta? <a href="/loguin">Faça login aqui</a></p>
+                <p class="text-muted">Já tem conta? <a href="/loguin">Entrar</a></p>
             </div>
         </div>
 
         <div class="text-center mt-3">
-            <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            <a href="/" class="btn btn-outline">Voltar</a>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+        <p>&copy; 2024 Estúdio</p>
     </footer>
 </body>
 </html>

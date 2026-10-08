@@ -3,57 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Estúdio</title>
+    <title>Entrar - Estúdio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <a href="/" class="navbar-brand">Estúdio</a>
             <ul class="navbar-menu">
-                <li class="navbar-item"><a href="/">Home</a></li>
-                <li class="navbar-item"><a href="/pagina_cadastro">Cadastro</a></li>
+                <li class="navbar-item"><a href="/">Início</a></li>
+                <li class="navbar-item"><a href="/pagina_cadastro">Cadastrar</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- LOGIN FORM -->
     <div class="container-sm">
-        <div class="card mt-3">
+        <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Fazer Login</h2>
+                <h2 class="card-title">Entrar</h2>
             </div>
 
-            <div class="card-body p-3">
+            <div class="card-body">
                 <form action="/loguin_sql" method="post">
                     <div class="form-group">
-                        <label for="email_loguin">📧 Email</label>
-                        <input type="email" id="email_loguin" name="email_loguin" required placeholder="Seu email">
+                        <label for="email_loguin">Email</label>
+                        <input type="email" id="email_loguin" name="email_loguin" required placeholder="seu@email.com" autocomplete="email">
                     </div>
 
                     <div class="form-group">
-                        <label for="senha_loguin">🔐 Senha</label>
-                        <input type="password" id="senha_loguin" name="senha_loguin" required placeholder="Sua senha">
+                        <label for="senha_loguin">Senha</label>
+                        <input type="password" id="senha_loguin" name="senha_loguin" required placeholder="Sua senha" autocomplete="current-password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-2">Entrar</button>
                 </form>
             </div>
 
             <div class="card-footer text-center">
-                <p>Não tem conta? <a href="/pagina_cadastro">Cadastre-se agora</a></p>
+                <p class="text-muted">Não tem conta? <a href="/pagina_cadastro">Cadastrar</a></p>
             </div>
         </div>
 
         <div class="text-center mt-3">
-            <a href="/" class="btn btn-outline">Voltar ao Home</a>
+            <a href="/" class="btn btn-outline">Voltar</a>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+        <p>&copy; 2024 Estúdio</p>
     </footer>
 </body>
 </html>

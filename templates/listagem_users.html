@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem de Usuários - Estúdio</title>
+    <title>Usuários - Estúdio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-brand">✨ Estúdio</a>
+            <a href="/" class="navbar-brand">Estúdio</a>
             <div class="navbar-menu">
                 <li class="navbar-item"><a href="/pagina_admin">Painel Admin</a></li>
                 <li class="navbar-item"><a href="/logout" class="logout-btn">Sair</a></li>
@@ -18,14 +17,13 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <div class="container-md">
-        <div class="card mt-3">
+        <div class="card">
             <div class="card-header">
-                <h2 class="card-title">👥 Listagem de Usuários</h2>
+                <h2 class="card-title">Listagem de Usuários</h2>
             </div>
 
-            <div class="card-body p-3">
+            <div class="card-body">
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -43,9 +41,9 @@
                                 <td>{{ usuario.nome }}</td>
                                 <td>{{ usuario.email }}</td>
                                 <td>
-                                    <form action="/del_user_admin" method="POST">
+                                    <form action="/del_user_admin" method="POST" style="display: inline;">
                                         <input type="hidden" name="id_del_user" value="{{ usuario.id_usuario }}">
-                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
                                     </form>
                                 </td>
                             </tr>
@@ -56,14 +54,13 @@
             </div>
 
             <div class="card-footer">
-                <a href="/pagina_admin" class="btn btn-secondary">Voltar ao Painel Admin</a>
+                <a href="/pagina_admin" class="btn btn-outline">Voltar</a>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2024 Estúdio - Sistema de Agendamentos</p>
+        <p>&copy; 2024 Estúdio</p>
     </footer>
 </body>
 </html>
